@@ -24,13 +24,16 @@ public ChooseLang() {
         public void actionPerformed(ActionEvent e) {
             JFrame next = PinBahasa.main();
             next.setContentPane(new PinBahasa().PanelPinBahasa);
+            PanelLanguage.setVisible(false);
         }
     });
 
     EnglishButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            JFrame next = PinEnglish.main();
+            next.setContentPane(new PinEnglish().PanelPinEnglish);
+            PanelLanguage.setVisible(false);
         }
     });
 }
