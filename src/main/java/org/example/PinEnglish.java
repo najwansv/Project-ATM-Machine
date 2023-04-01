@@ -22,6 +22,10 @@ public class PinEnglish {
     public JPanel PanelPinEnglish;
 
     public PinEnglish() {
+
+        User user = new User();
+        final String[] UserPIN = {user.getUserPin()};
+
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -39,6 +43,25 @@ public class PinEnglish {
         a8Button.addActionListener(listener);
         a9Button.addActionListener(listener);
         a0Button.addActionListener(listener);
+        CLEARButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        ENTERButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UserPIN[0] = passwordField1.getText();
+                if (UserPIN[0].equals("1234")) {
+                    JOptionPane.showMessageDialog(null, "Pin benar");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Pin salah");
+                }
+                System.out.println(UserPIN[0]);
+                passwordField1.setText("");
+            }
+        });
     }
 
     public static JFrame main() {

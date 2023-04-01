@@ -22,6 +22,10 @@ public class PinBahasa {
     public JPanel PanelPinBahasa;
 
     public PinBahasa() {
+
+        User user = new User();
+        final String[] UserPin = {user.getUserPin()};
+
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -50,14 +54,23 @@ public class PinBahasa {
         enterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String pin = passwordField1.getText();
-                if (pin.equals("1234")) {
-                    JOptionPane.showMessageDialog(null, "Pin benar");
+                UserPin[0] = passwordField1.getText();
+                if (UserPin[0].equals("1234")) {
+//                    JOptionPane.showMessageDialog(null, "Pin benar");
+
+                    JFrame next = MenuBahasa.main();
+                    next.setContentPane(new MenuBahasa().PanelMenuBahasa);
                 } else {
                     JOptionPane.showMessageDialog(null, "Pin salah");
                 }
-                System.out.println(pin);
+                System.out.println(UserPin[0]);
                 passwordField1.setText("");
+            }
+        });
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }

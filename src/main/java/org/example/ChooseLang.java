@@ -19,6 +19,7 @@ public static JFrame main() {
 }
 
 public ChooseLang() {
+
     BahasaButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
