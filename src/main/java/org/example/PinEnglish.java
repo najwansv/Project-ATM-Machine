@@ -59,7 +59,7 @@ public class PinEnglish {
                     JOptionPane.showMessageDialog(null, "Pin salah");
                 }
                 System.out.println(UserPIN[0]);
-                //hellooooo
+                //helloooo
                 passwordField1.setText("");
             }
         });
