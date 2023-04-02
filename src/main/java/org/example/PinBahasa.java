@@ -23,7 +23,7 @@ public class PinBahasa {
 
     public PinBahasa() {
 
-        User user = new User();
+        UserData user = new UserData();
         final String[] UserPin = {user.getUserPin()};
 
         ActionListener listener = new ActionListener() {

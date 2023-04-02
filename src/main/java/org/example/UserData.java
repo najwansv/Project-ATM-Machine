@@ -1,6 +1,6 @@
 package org.example;
 
-public class User {
+public class UserData {
     private String userPin;
     private int balance;
     private int userName;

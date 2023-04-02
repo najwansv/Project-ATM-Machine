@@ -23,7 +23,7 @@ public class PinEnglish {
 
     public PinEnglish() {
 
-        User user = new User();
+        UserData user = new UserData();
         final String[] UserPIN = {user.getUserPin()};
 
         ActionListener listener = new ActionListener() {

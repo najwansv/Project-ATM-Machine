@@ -11,6 +11,4 @@ public class Main {
         next.setContentPane(new ChooseLang().PanelLanguage);
     }
 
-
-
 }
