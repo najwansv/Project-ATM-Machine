@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//this is a test
 public class PinEnglish {
     private JPasswordField passwordField1;
     private JButton a1Button;
@@ -59,7 +60,6 @@ public class PinEnglish {
                     JOptionPane.showMessageDialog(null, "Pin salah");
                 }
                 System.out.println(UserPIN[0]);
-                //helloooo
                 passwordField1.setText("");
             }
         });
