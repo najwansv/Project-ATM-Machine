@@ -1,5 +1,7 @@
 package org.example;
 
+import org.eclipse.paho.client.mqttv3.MqttException;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -55,6 +57,13 @@ public class PinBahasa {
             @Override
             public void actionPerformed(ActionEvent e) {
                 UserPin[0] = passwordField1.getText();
+
+                try {
+                    user.checkUserPIN(UserPin[0]);
+                } catch (MqttException ex) {
+                    throw new RuntimeException(ex);
+                }
+
                 if (UserPin[0].equals("1234")) {
 //                    JOptionPane.showMessageDialog(null, "Pin benar");
 
