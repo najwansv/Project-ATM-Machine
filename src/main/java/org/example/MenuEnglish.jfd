@@ -1,0 +1,40 @@
+JFDML JFormDesigner: "8.0.3.0.246" Java: "17.0.6" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq t {space ::70:x, comp label1:::p:387:p, space :p:53:p}, seq l {space :p:53:p, par l {seq {comp button9:::p:98:p, space ::359:x}, seq {par l {comp button5:::p:98:p, comp button8:::p:98:p}, space ::183:x, par l {comp button7::t:p:98:p, comp button6::t:p:98:p}, space :p:78:p}}}}"
+			"$verticalGroup": "par l {seq t {space :p:71:p, comp label1:::p:48:p, space :p:31:p, par b {comp button5::b:p:62:p, comp button7::b:p:62:p}, space :p:31:p, par b {comp button8::b:p:62:p, comp button6::b:p:62:p}, space :p:30:p, comp button9:::p:62:p, space ::33:x}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "JIKA INGIN MEMBATALKAN TRANSAKSI TEKAN \"CANCEL"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button5"
+				"text": "1"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button6"
+				"text": "5"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button7"
+				"text": "4"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button8"
+				"text": "2"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button9"
+				"text": "3"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 5, 10 )
+			"size": new java.awt.Dimension( 510, 430 )
+		} )
+	}
+}
