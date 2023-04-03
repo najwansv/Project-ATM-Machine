@@ -1,5 +1,7 @@
 package org.example;
 
+import org.eclipse.paho.client.mqttv3.MqttException;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -47,18 +49,27 @@ public class PinEnglish {
         CLEARButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                passwordField1.setText("");
             }
         });
         ENTERButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 UserPIN[0] = passwordField1.getText();
-                if (UserPIN[0].equals("1234")) {
-                    JOptionPane.showMessageDialog(null, "Pin benar");
+
+                try {
+                    user.checkUserPIN(UserPIN[0]);
+                } catch (MqttException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+                if (UserPIN[0].equals("1234")){
+                    JFrame next = new MenuEnglish();
+                    next.setContentPane(new MenuEnglish().PanelMenuEnglish);
                 } else {
                     JOptionPane.showMessageDialog(null, "Pin salah");
                 }
+
                 System.out.println(UserPIN[0]);
                 passwordField1.setText("");
             }
