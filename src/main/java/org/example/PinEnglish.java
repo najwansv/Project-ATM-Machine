@@ -64,8 +64,7 @@ public class PinEnglish {
                 }
 
                 if (UserPIN[0].equals("1234")){
-                    JFrame next = new MenuEnglish();
-                    next.setContentPane(new MenuEnglish().PanelMenuEnglish);
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Pin salah");
                 }
