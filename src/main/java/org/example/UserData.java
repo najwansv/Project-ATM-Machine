@@ -68,6 +68,9 @@ public class UserData {
             e.printStackTrace();
         }
     }
+
+    // memeriksa pin yang di input
+
     public void checkUserPIN(String s) throws MqttException {
         String broker = "tcp://test.mosquitto.org:1883";
         String topic = "ATM/USER/PIN";
