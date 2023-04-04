@@ -56,7 +56,7 @@ public class PinEnglish {
             @Override
             public void actionPerformed(ActionEvent e) {
                 UserPIN[0] = passwordField1.getText();
-
+                /*
                 try {
                     user.checkUserPIN(UserPIN[0]);
                 } catch (MqttException ex) {
@@ -69,7 +69,7 @@ public class PinEnglish {
                 } else {
                     JOptionPane.showMessageDialog(null, "Pin salah");
                 }
-
+                */
                 System.out.println(UserPIN[0]);
                 passwordField1.setText("");
             }
