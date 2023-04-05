@@ -1,12 +1,21 @@
 package org.example;
 
-import org.eclipse.paho.client.mqttv3.MqttException;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.cloud.FirestoreClient;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 public class PinBahasa {
+
     private JPasswordField passwordField1;
     private JButton a1Button;
     private JButton a2Button;
@@ -24,8 +33,12 @@ public class PinBahasa {
     public JPanel PanelPinBahasa;
 
     public PinBahasa() {
-
-        UserData user = new UserData();
+        try {
+            UserData.initBase();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        UserData user = new UserData(FirestoreClient.getFirestore());
         final String[] UserPin = {user.getUserPin()};
 
         ActionListener listener = new ActionListener() {
@@ -56,23 +69,22 @@ public class PinBahasa {
         enterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 UserPin[0] = passwordField1.getText();
 
                 try {
-                    user.checkUserPIN(UserPin[0]);
-                } catch (MqttException ex) {
+                    boolean checking = user.checkUserPIN(UserPin[0],"SLne6V4h5lwT6vRv5cab");
+                    if (checking) {
+                        System.out.println("PIN is correct");
+                        JFrame next = MenuBahasa.main();
+                        next.setContentPane(new MenuBahasa().PanelMenuBahasa);
+                    } else {
+                        System.out.println("PIN is incorrect");
+                        JOptionPane.showMessageDialog(null, "PIN is incorrect");
+                    }
+                } catch (ExecutionException | InterruptedException ex) {
                     throw new RuntimeException(ex);
                 }
-
-                if (UserPin[0].equals("1234")) {
-//                    JOptionPane.showMessageDialog(null, "Pin benar");
-
-                    JFrame next = MenuBahasa.main();
-                    next.setContentPane(new MenuBahasa().PanelMenuBahasa);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Pin salah");
-                }
-                System.out.println(UserPin[0]);
                 passwordField1.setText("");
             }
         });

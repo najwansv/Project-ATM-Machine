@@ -1,9 +1,32 @@
 package org.example;
 
-import org.eclipse.paho.client.mqttv3.*;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+
+import com.google.api.core.ApiFuture;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.WriteResult;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.cloud.FirestoreClient;
 
 public class UserData {
+
+    private Firestore db;
+
+    public UserData(Firestore db) {
+        this.db = db;
+    }
+
     private String userPin;
     private int balance;
     private int userName;
@@ -14,6 +37,7 @@ public class UserData {
     }
 
     public int getBalance() {
+
         return balance;
     }
 
@@ -37,79 +61,46 @@ public class UserData {
         this.userName = userName;
     }
 
-    /* ngebuat fungsi buat ngecek pin yang ada di database dan yang di input itu bener apa engga
-    * dengan cara:
-    * 1. Mengambil data pin dari database
-    * 2. pake if else buat nentuin yang di input bener apa engga
-    *
-    * permasalahan yang dialami:
-    * 1. gabisa ngambil data kalo*/
+    public boolean checkUserPIN(String PIN, String IDCard) throws ExecutionException, InterruptedException {
+        boolean check = false;
 
-    public void sentTrigger() throws MqttException {
-        String broker = "tcp://test.mosquitto.org:1883";
-        String topic = "ATM/USER/PIN";
-        String clientid = "publish_client";
-        int qos = 0;
+        ApiFuture<QuerySnapshot> query = db.collection("UserData").whereEqualTo("PIN", PIN).get();
+        QuerySnapshot querySnapshot = query.get();
+        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
 
-        try {
-            MqttClient client = new MqttClient(broker, clientid, new MemoryPersistence());
-            // connect options
-            MqttConnectOptions options = new MqttConnectOptions();
-            options.setConnectionTimeout(60);
-            options.setKeepAliveInterval(60);
-            client.connect(options);
-            // publish
-            MqttMessage message = new MqttMessage();
-            message.setQos(qos);
-            message.setPayload("trigger".getBytes());
-            client.publish(topic, message);
-            client.disconnect();
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (QueryDocumentSnapshot document : documents) {
+            if (document.getId().equals(IDCard) && document.getString("PIN").equals(PIN)) {
+                check = true;
+                System.out.println("PIN is correct");
+            } else {
+                check = false;
+                System.out.println("PIN is incorrect");
+            }
+
         }
+        return check;
+    }
+    public static void initBase() throws FileNotFoundException, IOException {
+        FirebaseApp.initializeApp(FirebaseOptions.builder()
+                .setCredentials(GoogleCredentials.fromStream(new FileInputStream(
+                        "E:/OtherPrograms/atmmachine-791ba-firebase-adminsdk-yr9i7-3c8b81e06f.json")))
+                .setDatabaseUrl("https://atmmachine-791ba-default-rtdb.firebaseio.com")
+                .build());
+
     }
 
-    // memeriksa pin yang di input
+    public static void main(String[] args) throws IOException, ExecutionException, InterruptedException {
 
-    public void checkUserPIN(String s) throws MqttException {
-        String broker = "tcp://test.mosquitto.org:1883";
-        String topic = "ATM/USER/PIN";
-        String clientid = "subscribe_client";
-        int qos = 0;
+        initBase();
+        UserData app = new UserData(FirestoreClient.getFirestore());
 
-        try {
-            MqttClient client = new MqttClient(broker, clientid, new MemoryPersistence());
-            // connect options
-            MqttConnectOptions options = new MqttConnectOptions();
-            options.setConnectionTimeout(60);
-            options.setKeepAliveInterval(60);
+        String inputPin = "123123";
+        String IDCard = "SLne6V4h5lwT6vRv5cab";
 
-            sentTrigger();
-
-            // setup callback
-            client.setCallback(new MqttCallback() {
-
-                public void connectionLost(Throwable cause) {
-                    System.out.println("connectionLost: " + cause.getMessage());
-                }
-                // menerima data
-                public void messageArrived(String topic, MqttMessage message) {
-                    System.out.println("Pin: " + s);
-                    System.out.println("topic: " + topic);
-                    System.out.println("Qos: " + message.getQos());
-                    System.out.println("message content: " + new String(message.getPayload()));
-
-                }
-                public void deliveryComplete(IMqttDeliveryToken token) {
-                    System.out.println("deliveryComplete---------" + token.isComplete());
-                }
-
-            });
-            client.connect(options);
-            client.subscribe(topic, qos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // app.addData();
+        // app.checkPin(inputPin, IDCard);
+        System.out.println(app.checkUserPIN(inputPin, IDCard));
 
     }
+
 }

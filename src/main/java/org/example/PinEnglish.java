@@ -1,10 +1,13 @@
 package org.example;
 
-import org.eclipse.paho.client.mqttv3.MqttException;
+import com.google.firebase.cloud.FirestoreClient;
+
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 //this is a test
 public class PinEnglish {
@@ -25,8 +28,12 @@ public class PinEnglish {
     public JPanel PanelPinEnglish;
 
     public PinEnglish() {
-
-        UserData user = new UserData();
+        try {
+            UserData.initBase();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        UserData user = new UserData(FirestoreClient.getFirestore());
         final String[] UserPIN = {user.getUserPin()};
 
         ActionListener listener = new ActionListener() {
@@ -56,20 +63,21 @@ public class PinEnglish {
             @Override
             public void actionPerformed(ActionEvent e) {
                 UserPIN[0] = passwordField1.getText();
-                /*
+
+//                UserData user = new UserData(FirestoreClient.getFirestore());
                 try {
-                    user.checkUserPIN(UserPIN[0]);
-                } catch (MqttException ex) {
+                    boolean checking = user.checkUserPIN(UserPIN[0],"SLne6V4h5lwT6vRv5cab");
+                    if (checking) {
+                        System.out.println("PIN is correct");
+                        JFrame next = MenuBahasa.main();
+                        next.setContentPane(new MenuBahasa().PanelMenuBahasa);
+                    } else {
+                        System.out.println("PIN is incorrect");
+                        JOptionPane.showMessageDialog(null, "PIN is incorrect");
+                    }
+                } catch (ExecutionException | InterruptedException ex) {
                     throw new RuntimeException(ex);
                 }
-
-                if (UserPIN[0].equals("1234")){
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "Pin salah");
-                }
-                */
-                System.out.println(UserPIN[0]);
                 passwordField1.setText("");
             }
         });
