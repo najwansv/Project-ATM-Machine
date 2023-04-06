@@ -13,12 +13,13 @@ public class MenuBahasa {
     private JButton keluarButton;
 
     public MenuBahasa() {
+
         tarikTunaiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                JFrame next = TarikTunaiBahasa.main();
-//                next.setContentPane(new TarikTunaiBahasa().PanelTarikTunaiBahasa);
-//                PanelMenuBahasa.setVisible(false);
+                JFrame next = TarikTunaiBahasa.main();
+                next.setContentPane(new TarikTunaiBahasa().PanelTarikTunaiBahasa);
+                PanelMenuBahasa.setVisible(false);
             }
         });
     }
