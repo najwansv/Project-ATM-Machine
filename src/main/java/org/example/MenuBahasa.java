@@ -22,6 +22,38 @@ public class MenuBahasa {
                 PanelMenuBahasa.setVisible(false);
             }
         });
+        setorTunaiButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame next = SetorTunaiBahasa.main();
+                next.setContentPane(new SetorTunaiBahasa().PanelSetorTunaiBahasa);
+                PanelMenuBahasa.setVisible(false);
+            }
+        });
+        transferButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame next = TransferBahasa.main();
+                next.setContentPane(new TransferBahasa().PanelTransferBahasa);
+                PanelMenuBahasa.setVisible(false);
+            }
+        });
+        cekSaldoRekeningButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame next = CekSaldoBahasa.main();
+                next.setContentPane(new CekSaldoBahasa().PanelCekSaldoBahasa);
+                PanelMenuBahasa.setVisible(false);
+            }
+        });
+        keluarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame next = ChooseLang.main();
+                next.setContentPane(new ChooseLang().PanelLanguage);
+                PanelMenuBahasa.setVisible(false);
+            }
+        });
     }
 
     public static JFrame main() {
