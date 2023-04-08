@@ -5,7 +5,9 @@ import java.util.Scanner;
 
 
 public class Main {
-    // haloo patihhhh
+    /**
+     * gua udah ubah UserData yang initbase itu jadi lu bisa run juga
+     */
     public static void main(String[] args) {
         JFrame next = ChooseLang.main();
         next.setContentPane(new ChooseLang().PanelLanguage);
