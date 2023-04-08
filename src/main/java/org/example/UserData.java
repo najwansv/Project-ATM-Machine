@@ -20,7 +20,6 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 
 public class UserData {
-
     private Firestore db;
 
     public UserData(Firestore db) {
@@ -81,12 +80,17 @@ public class UserData {
         return check;
     }
     public static void initBase() throws FileNotFoundException, IOException {
-        FirebaseApp.initializeApp(FirebaseOptions.builder()
-                .setCredentials(GoogleCredentials.fromStream(new FileInputStream(
-                        "E:/OtherPrograms/atmmachine-791ba-firebase-adminsdk-yr9i7-3c8b81e06f.json")))
-                .setDatabaseUrl("https://atmmachine-791ba-default-rtdb.firebaseio.com")
-                .build());
-
+        GoogleCredentials credentials = GoogleCredentials.getApplicationDefault();
+        FirebaseOptions options = FirebaseOptions.builder()
+                .setCredentials(credentials)
+                .setProjectId("atmmachine-791ba")
+                .build();
+        try {
+            FirebaseApp.initializeApp(options);
+        } catch (IllegalStateException e) {
+            FirebaseApp.getInstance();
+        }
+//        FirebaseApp.initializeApp(options);
     }
 
     public static void main(String[] args) throws IOException, ExecutionException, InterruptedException {

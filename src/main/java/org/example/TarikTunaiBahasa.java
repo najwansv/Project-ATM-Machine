@@ -12,5 +12,11 @@ public class TarikTunaiBahasa {
     private JTextField textField1;
 
     public static JFrame main() {
+        JFrame frame = new JFrame("TarikTunaiBahasa");
+        frame.setContentPane(new TarikTunaiBahasa().PanelTarikTunaiBahasa);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+        return frame;
     }
 }
