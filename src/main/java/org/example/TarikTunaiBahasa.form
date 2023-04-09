@@ -5,7 +5,9 @@
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <preferredSize width="700" height="500"/>
+    </properties>
     <border type="none"/>
     <children>
       <component id="5830d" class="javax.swing.JButton" binding="a100Button" default-binding="true">
@@ -18,11 +20,12 @@
       </component>
       <component id="63531" class="javax.swing.JTextArea" binding="pilihNominalYangInginTextArea" default-binding="true">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
         <properties>
+          <tabSize value="8"/>
           <text value="Pilih nominal yang ingin ditarik:"/>
         </properties>
       </component>

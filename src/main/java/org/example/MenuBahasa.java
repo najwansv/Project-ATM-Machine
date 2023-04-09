@@ -49,9 +49,7 @@ public class MenuBahasa {
         keluarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame next = ChooseLang.main();
-                next.setContentPane(new ChooseLang().PanelLanguage);
-                PanelMenuBahasa.setVisible(false);
+                System.exit(0);
             }
         });
     }
