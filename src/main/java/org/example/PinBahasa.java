@@ -79,6 +79,7 @@ public class PinBahasa {
                         System.out.println("PIN is correct");
                         JFrame next = MenuBahasa.main();
                         next.setContentPane(new MenuBahasa().PanelMenuBahasa);
+                        PanelPinBahasa.setVisible(false);
                     } else {
                         System.out.println("PIN is incorrect");
                         JOptionPane.showMessageDialog(null, "PIN is incorrect");
