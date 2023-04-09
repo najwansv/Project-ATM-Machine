@@ -50,7 +50,8 @@ public class MenuBahasa {
         cekSaldoRekeningButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Saldo Anda Saat Ini Adalah Rp. " + UserBalance[0]);
+                int balance = Integer.parseInt(UserBalance[0].toString());
+                JOptionPane.showMessageDialog(null, "Saldo Anda Saat Ini Adalah Rp. " + balance);
             }
         });
         keluarButton.addActionListener(new ActionListener() {

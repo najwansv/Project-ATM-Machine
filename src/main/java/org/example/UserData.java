@@ -88,6 +88,7 @@ public class UserData {
 
         for (QueryDocumentSnapshot document : documents) {
             balance = document.getLong("Balance").intValue();
+            System.out.println("Balance is " + balance);
         }
         return balance;
     }
@@ -117,6 +118,7 @@ public class UserData {
         // app.addData();
         // app.checkPin(inputPin, IDCard);
         System.out.println(app.checkUserPIN(inputPin, IDCard));
+//        System.out.println(app.getBalance(IDCard));
 
     }
 
