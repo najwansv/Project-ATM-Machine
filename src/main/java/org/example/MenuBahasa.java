@@ -1,8 +1,11 @@
 package org.example;
 
+import com.google.firebase.cloud.FirestoreClient;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class MenuBahasa {
     public JPanel PanelMenuBahasa;
@@ -13,7 +16,13 @@ public class MenuBahasa {
     private JButton keluarButton;
 
     public MenuBahasa() {
-
+        try {
+            UserData.initBase();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        UserData user = new UserData(FirestoreClient.getFirestore());
+        final Integer[] UserBalance = {user.getBalance()};
         tarikTunaiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -41,9 +50,7 @@ public class MenuBahasa {
         cekSaldoRekeningButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame next = CekSaldoBahasa.main();
-                next.setContentPane(new CekSaldoBahasa().PanelCekSaldoBahasa);
-                PanelMenuBahasa.setVisible(false);
+                JOptionPane.showMessageDialog(null, "Saldo Anda Saat Ini Adalah Rp. " + UserBalance[0]);
             }
         });
         keluarButton.addActionListener(new ActionListener() {
