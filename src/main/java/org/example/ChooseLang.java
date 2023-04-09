@@ -25,7 +25,7 @@ public ChooseLang() {
         public void actionPerformed(ActionEvent e) {
             JFrame next = PinBahasa.main();
             next.setContentPane(new PinBahasa().PanelPinBahasa);
-            PanelLanguage.setVisible(false);
+            this.setVisible(false);
         }
     });
 
