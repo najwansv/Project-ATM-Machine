@@ -23,7 +23,7 @@ public class MenuBahasa {
             throw new RuntimeException(e);
         }
         UserData user = new UserData(FirestoreClient.getFirestore());
-        final Integer[] Userb = {user.getBalance()};
+        final Integer[] userBalance = {user.getBalance()};
 
         tarikTunaiButton.addActionListener(new ActionListener() {
             @Override
@@ -52,7 +52,7 @@ public class MenuBahasa {
         cekSaldoRekeningButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int balbal = Userb[0];
+                int balbal = userBalance[0];
                 JOptionPane.showMessageDialog(null, "Saldo Anda Saat Ini Adalah Rp. " + balbal);
             }
         });
