@@ -79,6 +79,19 @@ public class UserData {
         }
         return check;
     }
+    // get balance from database
+    public int getBalance(String IDCard) throws ExecutionException, InterruptedException {
+        int balance = 0;
+        ApiFuture<QuerySnapshot> query = db.collection("UserData").whereEqualTo("IDCard", IDCard).get();
+        QuerySnapshot querySnapshot = query.get();
+        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+
+        for (QueryDocumentSnapshot document : documents) {
+            balance = document.getLong("Balance").intValue();
+        }
+        return balance;
+    }
+
     public static void initBase() throws FileNotFoundException, IOException {
         GoogleCredentials credentials = GoogleCredentials.getApplicationDefault();
         FirebaseOptions options = FirebaseOptions.builder()
