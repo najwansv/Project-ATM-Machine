@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 public class MenuBahasa {
     public JPanel PanelMenuBahasa;
@@ -15,14 +16,15 @@ public class MenuBahasa {
     private JButton cekSaldoRekeningButton;
     private JButton keluarButton;
 
-    public MenuBahasa() {
+    public MenuBahasa() throws ExecutionException, InterruptedException {
         try {
             UserData.initBase();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         UserData user = new UserData(FirestoreClient.getFirestore());
-        final Integer[] UserBalance = {user.getBalance()};
+        final Integer[] Userb = {user.getBalance()};
+
         tarikTunaiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -50,8 +52,8 @@ public class MenuBahasa {
         cekSaldoRekeningButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int balance = Integer.parseInt(UserBalance[0].toString());
-                JOptionPane.showMessageDialog(null, "Saldo Anda Saat Ini Adalah Rp. " + balance);
+                int balbal = Userb[0];
+                JOptionPane.showMessageDialog(null, "Saldo Anda Saat Ini Adalah Rp. " + balbal);
             }
         });
         keluarButton.addActionListener(new ActionListener() {
@@ -62,7 +64,7 @@ public class MenuBahasa {
         });
     }
 
-    public static JFrame main() {
+    public static JFrame main() throws ExecutionException, InterruptedException {
         JFrame frame = new JFrame("MenuBahasa");
         frame.setContentPane(new MenuBahasa().PanelMenuBahasa);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
