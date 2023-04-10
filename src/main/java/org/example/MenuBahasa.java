@@ -51,8 +51,15 @@ public class MenuBahasa {
             @Override
             public void actionPerformed(ActionEvent e) {
             int setor = Integer.parseInt(JOptionPane.showInputDialog("Masukkan Jumlah Uang Yang Akan Disetor"));
-            int setorTunai = userBalance[0] + setor;
+            int setorTunai = balance + setor;
             JOptionPane.showMessageDialog(null, "Saldo Anda Saat Ini Adalah Rp. " + setorTunai);
+                try {
+                    user.updateUserBalance(setorTunai);
+                } catch (ExecutionException ex) {
+                    throw new RuntimeException(ex);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         transferButton.addActionListener(new ActionListener() {

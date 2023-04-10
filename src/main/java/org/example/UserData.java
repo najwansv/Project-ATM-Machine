@@ -54,6 +54,10 @@ public class UserData {
         return userName;
     }
 
+    public void updateUserBalance(Integer balance) throws ExecutionException, InterruptedException {
+        updateBalance(userCardid(), balance);
+    }
+
     public void setUserPin(boolean checkUserPin) {
 
         this.checkUserPin = checkUserPin;
@@ -88,6 +92,20 @@ public class UserData {
         System.out.println(balance);
         return balance;
     }
+
+    public void updateBalance(String IDCard, Integer newBalance) throws InterruptedException, ExecutionException {
+
+        // Update an existing document
+        DocumentReference docRef = db.collection("UserData").document(IDCard);
+
+        // (async) Update one field
+        ApiFuture<WriteResult> future = docRef.update("Balance", newBalance);
+
+        // ...
+        WriteResult result = future.get();
+        System.out.println("Write result: " + result);
+    }
+
 
     public String getName(String AccNumber) throws InterruptedException, ExecutionException {
 
