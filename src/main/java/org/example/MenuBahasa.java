@@ -50,15 +50,24 @@ public class MenuBahasa {
         setorTunaiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            int setor = Integer.parseInt(JOptionPane.showInputDialog("Masukkan Jumlah Uang Yang Akan Disetor"));
-            int setorTunai = balance + setor;
-            JOptionPane.showMessageDialog(null, "Saldo Anda Saat Ini Adalah Rp. " + setorTunai);
+                int setor = Integer.parseInt(JOptionPane.showInputDialog("Masukkan Jumlah Uang Yang Akan Disetor"));
+                int setorTunai = balance + setor;
+                JOptionPane.showMessageDialog(null, "Saldo Anda Saat Ini Adalah Rp. " + setorTunai);
                 try {
                     user.updateUserBalance(setorTunai);
                 } catch (ExecutionException ex) {
                     throw new RuntimeException(ex);
                 } catch (InterruptedException ex) {
                     throw new RuntimeException(ex);
+                }
+                var YesorNo = JOptionPane.showConfirmDialog(null, "Apakah anda mempunyai transaksi lainnya?");
+                if (YesorNo == JOptionPane.YES_OPTION) {
+                    PanelMenuBahasa.setVisible(false);
+                    PinBahasa.main();
+                } else if (YesorNo == JOptionPane.NO_OPTION) {
+                    System.exit(0);
+                } else if (YesorNo == JOptionPane.CANCEL_OPTION) {
+                    System.exit(0);
                 }
             }
         });
@@ -67,14 +76,36 @@ public class MenuBahasa {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showInputDialog("Masukkan Nomor Rekening Tujuan");
                 int transfer = Integer.parseInt(JOptionPane.showInputDialog("Masukkan Jumlah Uang Yang Akan Ditransfer"));
-                int transferTunai = userBalance[0] - transfer;
-                JOptionPane.showMessageDialog(null, "Saldo Anda Saat Ini Adalah Rp. " + transferTunai);
+                if(transfer > balance){
+                    JOptionPane.showMessageDialog(null, "Saldo Anda Tidak Mencukupi");
+                }else {
+                    int transferTunai = userBalance[0] - transfer;
+                    JOptionPane.showMessageDialog(null, "Transfer Berhasil, Saldo Anda Saat Ini Adalah Rp. " + transferTunai);
+                }
+                var YesorNo = JOptionPane.showConfirmDialog(null, "Apakah anda mempunyai transaksi lainnya?");
+                if (YesorNo == JOptionPane.YES_OPTION) {
+                    PanelMenuBahasa.setVisible(false);
+                    PinBahasa.main();
+                } else if (YesorNo == JOptionPane.NO_OPTION) {
+                    System.exit(0);
+                }else if (YesorNo == JOptionPane.CANCEL_OPTION) {
+                    System.exit(0);
+                }
             }
         });
         cekSaldoRekeningButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Saldo Anda Saat Ini Adalah Rp. " + balance);
+                var YesorNo = JOptionPane.showConfirmDialog(null, "Apakah anda mempunyai transaksi lainnya?");
+                if (YesorNo == JOptionPane.YES_OPTION) {
+                    PanelMenuBahasa.setVisible(false);
+                    PinBahasa.main();
+                } else if (YesorNo == JOptionPane.NO_OPTION) {
+                    System.exit(0);
+                }else if (YesorNo == JOptionPane.CANCEL_OPTION) {
+                    System.exit(0);
+                }
             }
         });
         keluarButton.addActionListener(new ActionListener() {
