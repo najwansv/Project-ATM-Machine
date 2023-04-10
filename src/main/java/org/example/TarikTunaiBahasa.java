@@ -1,6 +1,12 @@
 package org.example;
 
+import com.google.firebase.cloud.FirestoreClient;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 public class TarikTunaiBahasa {
 
@@ -9,9 +15,50 @@ public class TarikTunaiBahasa {
     private JButton a300Button;
     private JButton a200Button;
     private JTextArea pilihNominalYangInginTextArea;
-    private JTextField textField1;
+    private JButton nominalLainButton;
 
-    public static JFrame main() {
+    public TarikTunaiBahasa() throws ExecutionException, InterruptedException{
+        try {
+            UserData.initBase();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        UserData user = new UserData(FirestoreClient.getFirestore());
+        final Integer[] userBalance = {user.getBalance()};
+        int NominalTarik = userBalance[0];
+
+//        nominalLainButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                int opsiNominalLain = ;
+//                JOptionPane.showMessageDialog(null, "Rp." + opsiNominalLain);
+//            }
+//        });
+
+        a100Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int opsi100 = userBalance[0] - 100;
+                JOptionPane.showMessageDialog(null, "Rp." + opsi100);
+            }
+        });
+        a200Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int opsi200 = userBalance[0] - 200;
+                JOptionPane.showMessageDialog(null, "Rp." + opsi200);
+            }
+        });
+        a300Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int opsi300 = userBalance[0] - 300;
+                JOptionPane.showMessageDialog(null, "Rp." + opsi300);
+            }
+        });
+    }
+
+    public static JFrame main() throws ExecutionException, InterruptedException {
         JFrame frame = new JFrame("TarikTunaiBahasa");
         frame.setContentPane(new TarikTunaiBahasa().PanelTarikTunaiBahasa);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -28,8 +28,21 @@ public class MenuBahasa {
         tarikTunaiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame next = TarikTunaiBahasa.main();
-                next.setContentPane(new TarikTunaiBahasa().PanelTarikTunaiBahasa);
+                JFrame next = null;
+                try {
+                    next = TarikTunaiBahasa.main();
+                } catch (ExecutionException ex) {
+                    throw new RuntimeException(ex);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+                try {
+                    next.setContentPane(new TarikTunaiBahasa().PanelTarikTunaiBahasa);
+                } catch (ExecutionException ex) {
+                    throw new RuntimeException(ex);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
                 PanelMenuBahasa.setVisible(false);
             }
         });

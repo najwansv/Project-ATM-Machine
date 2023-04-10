@@ -24,7 +24,7 @@ public class UserData {
     private int userName;
 
     public static String userCardid() {
-        String IDCard = "hAzGZvUf99Fa1gjbtzdJ";
+        String IDCard = "75:25:F1:41";
         return IDCard;
     }
 
