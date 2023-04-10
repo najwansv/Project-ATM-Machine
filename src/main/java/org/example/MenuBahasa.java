@@ -50,8 +50,9 @@ public class MenuBahasa {
         setorTunaiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-            JOptionPane.showInputDialog("Masukkan Jumlah Uang Yang Akan Disetor")
+            int setor = Integer.parseInt(JOptionPane.showInputDialog("Masukkan Jumlah Uang Yang Akan Disetor"));
+            int setorTunai = userBalance[0] + setor;
+            JOptionPane.showMessageDialog(null, "Saldo Anda Saat Ini Adalah Rp. " + setorTunai);
             }
         });
         transferButton.addActionListener(new ActionListener() {

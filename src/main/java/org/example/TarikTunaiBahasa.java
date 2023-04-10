@@ -27,13 +27,14 @@ public class TarikTunaiBahasa {
         final Integer[] userBalance = {user.getBalance()};
         int NominalTarik = userBalance[0];
 
-//        nominalLainButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                int opsiNominalLain = ;
-//                JOptionPane.showMessageDialog(null, "Rp." + opsiNominalLain);
-//            }
-//        });
+        nominalLainButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int nominalLain = Integer.parseInt(JOptionPane.showInputDialog("Masukkan Nominal Yang Ingin Ditarik"));
+                int opsiLain = userBalance[0] - nominalLain;
+                JOptionPane.showMessageDialog(null, "Saldo Anda Saat Ini Adalah Rp." + opsiLain);
+            }
+        });
 
         a100Button.addActionListener(new ActionListener() {
             @Override
