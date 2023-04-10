@@ -25,36 +25,64 @@ public class TarikTunaiBahasa {
         }
         UserData user = new UserData(FirestoreClient.getFirestore());
         final Integer[] userBalance = {user.getBalance()};
-        int NominalTarik = userBalance[0];
+        int balance = userBalance[0];
 
         nominalLainButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int nominalLain = Integer.parseInt(JOptionPane.showInputDialog("Masukkan Nominal Yang Ingin Ditarik"));
-                int opsiLain = userBalance[0] - nominalLain;
+                int opsiLain = balance - nominalLain;
                 JOptionPane.showMessageDialog(null, "Saldo Anda Saat Ini Adalah Rp." + opsiLain);
+                try {
+                    user.updateUserBalance(opsiLain);
+                } catch (ExecutionException ex) {
+                    throw new RuntimeException(ex);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
         a100Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int opsi100 = userBalance[0] - 100;
+                int opsi100 = balance - 100;
                 JOptionPane.showMessageDialog(null, "Rp." + opsi100);
+                try {
+                    user.updateUserBalance(opsi100);
+                } catch (ExecutionException ex) {
+                    throw new RuntimeException(ex);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         a200Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int opsi200 = userBalance[0] - 200;
+                int opsi200 = balance - 200;
                 JOptionPane.showMessageDialog(null, "Rp." + opsi200);
+                try {
+                    user.updateUserBalance(opsi200);
+                } catch (ExecutionException ex) {
+                    throw new RuntimeException(ex);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         a300Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int opsi300 = userBalance[0] - 300;
+                int opsi300 = balance - 300;
                 JOptionPane.showMessageDialog(null, "Rp." + opsi300);
+                try {
+                    user.updateUserBalance(opsi300);
+                } catch (ExecutionException ex) {
+                    throw new RuntimeException(ex);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
     }
