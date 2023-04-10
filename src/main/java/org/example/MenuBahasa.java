@@ -58,9 +58,9 @@ public class MenuBahasa {
         transferButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame next = TransferBahasa.main();
-                next.setContentPane(new TransferBahasa().PanelTransferBahasa);
-                PanelMenuBahasa.setVisible(false);
+//                JFrame next = TransferBahasa.main();
+//                next.setContentPane(new TransferBahasa().PanelTransferBahasa);
+//                PanelMenuBahasa.setVisible(false);
             }
         });
         cekSaldoRekeningButton.addActionListener(new ActionListener() {

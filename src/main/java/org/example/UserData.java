@@ -89,6 +89,23 @@ public class UserData {
         return balance;
     }
 
+    public String getName(String AccNumber) throws InterruptedException, ExecutionException {
+
+        String destinationName = "";
+
+        ApiFuture<QuerySnapshot> query = db.collection("UserData").whereEqualTo("AccNumber", AccNumber).get();
+        QuerySnapshot querySnapshot = query.get();
+        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+
+        for (QueryDocumentSnapshot document : documents) {
+            if (document.getString("AccNumber").equals(AccNumber)) {
+                System.out.println("Name: " + document.getString("Name"));
+                destinationName = document.getString("Name");
+            }
+        }
+        return destinationName;
+    }
+
     public static void initBase() throws FileNotFoundException, IOException {
         GoogleCredentials credentials = GoogleCredentials.getApplicationDefault();
         FirebaseOptions options = FirebaseOptions.builder()
