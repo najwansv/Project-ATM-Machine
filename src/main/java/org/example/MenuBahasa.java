@@ -58,9 +58,10 @@ public class MenuBahasa {
         transferButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                JFrame next = TransferBahasa.main();
-//                next.setContentPane(new TransferBahasa().PanelTransferBahasa);
-//                PanelMenuBahasa.setVisible(false);
+                JOptionPane.showInputDialog("Masukkan Nomor Rekening Tujuan");
+                int transfer = Integer.parseInt(JOptionPane.showInputDialog("Masukkan Jumlah Uang Yang Akan Ditransfer"));
+                int transferTunai = userBalance[0] - transfer;
+                JOptionPane.showMessageDialog(null, "Saldo Anda Saat Ini Adalah Rp. " + transferTunai);
             }
         });
         cekSaldoRekeningButton.addActionListener(new ActionListener() {
