@@ -25,6 +25,7 @@ public class PinBahasa {
     private JButton enterButton;
     private JButton a0Button;
     public JPanel PanelPinBahasa;
+    int i = 0;
 
     public PinBahasa() {
         try {
@@ -63,17 +64,41 @@ public class PinBahasa {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String inputtedPin = passwordField1.getText();
+
                 try {
+                    int go = 0;
+                    String inputtedPin = passwordField1.getText();
                     boolean checking = user.getUserPin(inputtedPin);
                     if (checking) {
+                        go = 1;
                         System.out.println("PIN is correct");
-                        JFrame next = MenuBahasa.main();
-                        next.setContentPane(new MenuBahasa().PanelMenuBahasa);
-                        PanelPinBahasa.setVisible(false);
                     } else {
                         System.out.println("PIN is incorrect");
                         JOptionPane.showMessageDialog(null, "PIN is incorrect");
+                        if(i !=2){
+                                var YesNo = JOptionPane.showConfirmDialog(null, "Do you want to Exit?", "Try Again", JOptionPane.YES_NO_OPTION);
+                                if(YesNo == JOptionPane.YES_OPTION) {
+                                    go = 2;
+                                } else if (YesNo == JOptionPane.NO_OPTION) {
+                                    go = 3;
+                                    i++;
+                            }
+                        }else{
+                            i++;
+                        }
+                    }
+                    if(go == 1){
+                        JFrame next = MenuBahasa.main();
+                        next.setContentPane(new MenuBahasa().PanelMenuBahasa);
+                        PanelPinBahasa.setVisible(false);
+                    } else if (go == 2) {
+                        JOptionPane.showMessageDialog(null, "Take ur atm card");
+                        System.exit(0);
+                    } else if (go == 3) {
+                        JOptionPane.showMessageDialog(null, "Try again");
+                    } else if(i == 3){
+                        JOptionPane.showMessageDialog(null, "You have entered the wrong PIN 3 times. Please try again later.");
+                        System.exit(0);
                     }
 
                 } catch (ExecutionException ex) {
