@@ -40,7 +40,6 @@ public class PinBahasa {
             throw new RuntimeException(e);
         }
         UserData user = new UserData(FirestoreClient.getFirestore());
-        final String[] UserPin = {user.getUserPin()};
 
         ActionListener listener = new ActionListener() {
             @Override
@@ -71,10 +70,9 @@ public class PinBahasa {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                UserPin[0] = passwordField1.getText();
-
+                String inputtedPin = passwordField1.getText();
                 try {
-                    boolean checking = user.checkUserPIN(UserPin[0],"SLne6V4h5lwT6vRv5cab");
+                    boolean checking = user.getUserPin(inputtedPin);
                     if (checking) {
                         System.out.println("PIN is correct");
                         JFrame next = MenuBahasa.main();
@@ -84,10 +82,12 @@ public class PinBahasa {
                         System.out.println("PIN is incorrect");
                         JOptionPane.showMessageDialog(null, "PIN is incorrect");
                     }
-                } catch (ExecutionException | InterruptedException ex) {
+
+                } catch (ExecutionException ex) {
+                    throw new RuntimeException(ex);
+                } catch (InterruptedException ex) {
                     throw new RuntimeException(ex);
                 }
-                passwordField1.setText("");
             }
         });
         cancelButton.addActionListener(new ActionListener() {

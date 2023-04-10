@@ -19,13 +19,18 @@ public class UserData {
         this.db = db;
     }
 
-    private String userPin;
+    private boolean userPin;
     private int balance;
     private int userName;
 
-    public String getUserPin() {
-
-        return userPin;
+    public boolean getUserPin(String inputPin) throws ExecutionException, InterruptedException {
+            boolean check = false;
+            if (checkUserPIN("1234", "SLne6V4h5lwT6vRv5cab").equals(inputPin)) {
+                check = true;
+            } else {
+                check = false;
+            }
+        return check;
     }
 
     public int getBalance() {
@@ -44,7 +49,7 @@ public class UserData {
         return userName;
     }
 
-    public void setUserPin(String userPin) {
+    public void setUserPin(boolean userPin) {
 
         this.userPin = userPin;
     }
@@ -59,26 +64,16 @@ public class UserData {
         this.userName = userName;
     }
 
-    public boolean checkUserPIN(String PIN, String IDCard) throws ExecutionException, InterruptedException {
-        boolean check = false;
+    public String checkUserPIN(String PIN, String IDCard) throws ExecutionException, InterruptedException {
 
-        ApiFuture<QuerySnapshot> query = db.collection("UserData").whereEqualTo("PIN", PIN).get();
-        QuerySnapshot querySnapshot = query.get();
-        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+        ApiFuture<DocumentSnapshot> query = db.collection("UserData").document(IDCard).get();
+        DocumentSnapshot querySnapshot = query.get();
 
-        for (QueryDocumentSnapshot document : documents) {
-            if (document.getId().equals(IDCard) && document.getString("PIN").equals(PIN)) {
-                check = true;
-                System.out.println("PIN is correct");
-            } else {
-                check = false;
-                System.out.println("PIN is incorrect");
-            }
-
-        }
-        return check;
+        String userPinn = querySnapshot.getString("PIN");
+        System.out.println(userPinn);
+        return userPinn;
     }
-    // get balance from database
+
     public void getUserBalance(String IDCard) throws ExecutionException, InterruptedException {
 
         ApiFuture<DocumentSnapshot> query = db.collection("UserData").document(IDCard).get();
@@ -86,7 +81,6 @@ public class UserData {
 
         balance = querySnapshot.getLong("Balance").intValue();
         System.out.println(balance);
-//        return balance;
     }
 
     public static void initBase() throws FileNotFoundException, IOException {
@@ -113,9 +107,9 @@ public class UserData {
 
         // app.addData();
         // app.checkPin(inputPin, IDCard);
-        System.out.println(app.checkUserPIN(inputPin, IDCard));
+        app.checkUserPIN(inputPin, IDCard);
 //        System.out.println(app.getBalance(IDCard));
-
+        System.out.println("halo");
     }
 
 }
