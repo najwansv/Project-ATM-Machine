@@ -60,13 +60,11 @@ public class MenuBahasa {
                 } catch (InterruptedException ex) {
                     throw new RuntimeException(ex);
                 }
-                var YesorNo = JOptionPane.showConfirmDialog(null, "Apakah anda mempunyai transaksi lainnya?");
-                if (YesorNo == JOptionPane.YES_OPTION) {
-                    PanelMenuBahasa.setVisible(false);
+                var YesNo = JOptionPane.showConfirmDialog(null, "Apakah Anda Ingin Melakukan Transaksi Lain?", "Transaksi Lain", JOptionPane.YES_NO_OPTION);
+                if (YesNo == JOptionPane.YES_OPTION) {
                     PinBahasa.main();
-                } else if (YesorNo == JOptionPane.NO_OPTION) {
-                    System.exit(0);
-                } else if (YesorNo == JOptionPane.CANCEL_OPTION) {
+                    PanelMenuBahasa.setVisible(false);
+                } else {
                     System.exit(0);
                 }
             }
@@ -76,19 +74,19 @@ public class MenuBahasa {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showInputDialog("Masukkan Nomor Rekening Tujuan");
                 int transfer = Integer.parseInt(JOptionPane.showInputDialog("Masukkan Jumlah Uang Yang Akan Ditransfer"));
+                // cek saldo
                 if(transfer > balance){
                     JOptionPane.showMessageDialog(null, "Saldo Anda Tidak Mencukupi");
                 }else {
                     int transferTunai = userBalance[0] - transfer;
                     JOptionPane.showMessageDialog(null, "Transfer Berhasil, Saldo Anda Saat Ini Adalah Rp. " + transferTunai);
                 }
-                var YesorNo = JOptionPane.showConfirmDialog(null, "Apakah anda mempunyai transaksi lainnya?");
-                if (YesorNo == JOptionPane.YES_OPTION) {
-                    PanelMenuBahasa.setVisible(false);
+                // opsi untuk melakukan transaksi lain
+                var YesNo = JOptionPane.showConfirmDialog(null, "Apakah Anda Ingin Melakukan Transaksi Lain?", "Transaksi Lain", JOptionPane.YES_NO_OPTION);
+                if (YesNo == JOptionPane.YES_OPTION) {
                     PinBahasa.main();
-                } else if (YesorNo == JOptionPane.NO_OPTION) {
-                    System.exit(0);
-                }else if (YesorNo == JOptionPane.CANCEL_OPTION) {
+                    PanelMenuBahasa.setVisible(false);
+                } else {
                     System.exit(0);
                 }
             }
@@ -97,13 +95,11 @@ public class MenuBahasa {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Saldo Anda Saat Ini Adalah Rp. " + balance);
-                var YesorNo = JOptionPane.showConfirmDialog(null, "Apakah anda mempunyai transaksi lainnya?");
-                if (YesorNo == JOptionPane.YES_OPTION) {
-                    PanelMenuBahasa.setVisible(false);
+                var YesNo = JOptionPane.showConfirmDialog(null, "Apakah Anda Ingin Melakukan Transaksi Lain?", "Transaksi Lain", JOptionPane.YES_NO_OPTION);
+                if (YesNo == JOptionPane.YES_OPTION) {
                     PinBahasa.main();
-                } else if (YesorNo == JOptionPane.NO_OPTION) {
-                    System.exit(0);
-                }else if (YesorNo == JOptionPane.CANCEL_OPTION) {
+                    PanelMenuBahasa.setVisible(false);
+                } else {
                     System.exit(0);
                 }
             }
