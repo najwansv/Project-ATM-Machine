@@ -72,14 +72,35 @@ public class MenuBahasa {
         transferButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showInputDialog("Masukkan Nomor Rekening Tujuan");
+                String AccountNumber = JOptionPane.showInputDialog("Masukkan Nomor Rekening Tujuan");
+//                JOptionPane.showInputDialog("Masukkan Nomor Rekening Tujuan");
                 int transfer = Integer.parseInt(JOptionPane.showInputDialog("Masukkan Jumlah Uang Yang Akan Ditransfer"));
                 // cek saldo
                 if(transfer > balance){
                     JOptionPane.showMessageDialog(null, "Saldo Anda Tidak Mencukupi");
                 }else {
+                    String NamaTujuan = null;
+                    try {
+                        NamaTujuan = user.getName(AccountNumber);
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (ExecutionException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     int transferTunai = userBalance[0] - transfer;
-                    JOptionPane.showMessageDialog(null, "Transfer Berhasil, Saldo Anda Saat Ini Adalah Rp. " + transferTunai);
+                    var tru = JOptionPane.showConfirmDialog(null, "Apakah Anda Yakin Ingin Melakukan Transfer ke:\nA/N : "+ NamaTujuan + "\nNomor rekening : " + AccountNumber,"Tujuan", JOptionPane.YES_NO_OPTION);
+                    if(tru == JOptionPane.YES_OPTION){
+                        JOptionPane.showMessageDialog(null, "Transfer Berhasil, Saldo Anda Saat Ini Adalah Rp. " + transferTunai);
+                        try {
+                            user.updateUserBalance(transferTunai);
+                        } catch (ExecutionException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (InterruptedException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Transfer Dibatalkan");
+                    }
                 }
                 // opsi untuk melakukan transaksi lain
                 var YesNo = JOptionPane.showConfirmDialog(null, "Apakah Anda Ingin Melakukan Transaksi Lain?", "Transaksi Lain", JOptionPane.YES_NO_OPTION);
