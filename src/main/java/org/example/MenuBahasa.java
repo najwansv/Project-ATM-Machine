@@ -79,20 +79,23 @@ public class MenuBahasa {
                 if(transfer > balance){
                     JOptionPane.showMessageDialog(null, "Saldo Anda Tidak Mencukupi");
                 }else {
-                    String NamaTujuan = null;
+                    String NamaTujuan = "";
+                    int TransferTujuan = 0;
                     try {
                         NamaTujuan = user.getName(AccountNumber);
+                        TransferTujuan = user.getUserBalance(user.getDestinationDocument(AccountNumber)) + transfer;
                     } catch (InterruptedException ex) {
                         throw new RuntimeException(ex);
                     } catch (ExecutionException ex) {
                         throw new RuntimeException(ex);
                     }
-                    int transferTunai = userBalance[0] - transfer;
-                    var tru = JOptionPane.showConfirmDialog(null, "Apakah Anda Yakin Ingin Melakukan Transfer ke:\nA/N : "+ NamaTujuan + "\nNomor rekening : " + AccountNumber,"Tujuan", JOptionPane.YES_NO_OPTION);
+                    int transferTunai = balance - transfer;
+                    var tru = JOptionPane.showConfirmDialog(null, "Apakah Anda Yakin Ingin Melakukan Transfer ke:\nA/N : "+ NamaTujuan + "\nNomor rekening : " + AccountNumber,"Konfirmasi Transfer", JOptionPane.YES_NO_OPTION);
                     if(tru == JOptionPane.YES_OPTION){
                         JOptionPane.showMessageDialog(null, "Transfer Berhasil, Saldo Anda Saat Ini Adalah Rp. " + transferTunai);
                         try {
                             user.updateUserBalance(transferTunai);
+                            user.updateBalance(user.getDestinationDocument(AccountNumber),TransferTujuan);
                         } catch (ExecutionException ex) {
                             throw new RuntimeException(ex);
                         } catch (InterruptedException ex) {

@@ -106,6 +106,25 @@ public class UserData {
         System.out.println("Write result: " + result);
     }
 
+    public String getDestinationDocument(String AccNumber) throws InterruptedException, ExecutionException {
+
+        String destinationIDcard = "";
+
+        ApiFuture<QuerySnapshot> query = db.collection("UserData").whereEqualTo("AccNumber", AccNumber).get();
+        QuerySnapshot querySnapshot = query.get();
+        List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
+
+        for (QueryDocumentSnapshot document : documents) {
+            if (document.getString("AccNumber").equals(AccNumber)) {
+                System.out.println("Name: " + document.getString("Name"));
+                destinationIDcard = document.getId();
+//                updateBalance(document.getId(), newBalance);
+
+            }
+        }
+
+        return destinationIDcard;
+    }
 
     public String getName(String AccNumber) throws InterruptedException, ExecutionException {
 
