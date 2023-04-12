@@ -63,20 +63,18 @@ public class PinBahasa {
         enterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-
                 try {
                     int go = 0;
                     String inputtedPin = passwordField1.getText();
                     boolean checking = user.getUserPin(inputtedPin);
                     if (checking) {
                         go = 1;
-                        System.out.println("PIN is correct");
+                        System.out.println("PIN anda Benar");
                     } else {
-                        System.out.println("PIN is incorrect");
-                        JOptionPane.showMessageDialog(null, "PIN is incorrect");
+                        System.out.println("PIN anda Salah");
+                        JOptionPane.showMessageDialog(null, "PIN anda salah");
                         if(i !=2){
-                                var YesNo = JOptionPane.showConfirmDialog(null, "Do you want to Exit?", "Try Again", JOptionPane.YES_NO_OPTION);
+                                var YesNo = JOptionPane.showConfirmDialog(null, "Apakah anda ingin keluar?", "Coba Lagi", JOptionPane.YES_NO_OPTION);
                                 if(YesNo == JOptionPane.YES_OPTION) {
                                     go = 2;
                                 } else if (YesNo == JOptionPane.NO_OPTION) {
@@ -92,12 +90,12 @@ public class PinBahasa {
                         next.setContentPane(new MenuBahasa().PanelMenuBahasa);
                         PanelPinBahasa.setVisible(false);
                     } else if (go == 2) {
-                        JOptionPane.showMessageDialog(null, "Take ur atm card");
+                        JOptionPane.showMessageDialog(null, "Silahkan ambil Kartu Anda");
                         System.exit(0);
                     } else if (go == 3) {
-                        JOptionPane.showMessageDialog(null, "Try again");
+                        JOptionPane.showMessageDialog(null, "Coba Lagi");
                     } else if(i == 3){
-                        JOptionPane.showMessageDialog(null, "You have entered the wrong PIN 3 times. Please try again later.");
+                        JOptionPane.showMessageDialog(null, "Anda telah memasukkan PIN yang salah 3 kali. Silahkan Mencoba lagi Nanti.");
                         System.exit(0);
                     }
 
@@ -111,7 +109,8 @@ public class PinBahasa {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                JOptionPane.showMessageDialog(null, "Silahkan ambil Kartu Anda");
+                System.exit(0);
             }
         });
     }

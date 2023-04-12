@@ -28,7 +28,10 @@ public class MenuEnglish {
         withdrawButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                JFrame next = null;
+                next = WithdrawEnglish.main();
+                next.setContentPane(new WithdrawEnglish().PanelWithdrawEnglish);
+                PanelMenuEnglish.setVisible(false);
             }
         });
         depositButton.addActionListener(new ActionListener() {
@@ -56,7 +59,65 @@ public class MenuEnglish {
         transferButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String NamaTujuan = "";
+                int TransferTujuan = 0;
 
+                String AccountNumber = JOptionPane.showInputDialog(null, "Enter your destination account number");
+                try {
+                    NamaTujuan = user.getName(AccountNumber);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ExecutionException ex) {
+                    throw new RuntimeException(ex);
+                }
+                try {
+                    if(NamaTujuan == user.getName(AccountNumber)){
+                        JOptionPane.showMessageDialog(null, "The Account number is not registered");
+                        return;
+                    }else{
+                        JOptionPane.showMessageDialog(null, "The Account Name : " + NamaTujuan);
+                    }
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ExecutionException ex) {
+                    throw new RuntimeException(ex);
+                }
+                int transfer = Integer.parseInt(JOptionPane.showInputDialog("Enter The Amount to Transfer"));
+                // cek saldo
+                if(transfer > balance){
+                    JOptionPane.showMessageDialog(null, "Your balance is insufficient");
+                }else {
+                    try {
+                        TransferTujuan = user.getUserBalance(user.getDestinationDocument(AccountNumber)) + transfer;
+                    } catch (ExecutionException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    int transferTunai = balance - transfer;
+                    var tru = JOptionPane.showConfirmDialog(null, "Are you Certain to Transfer to:\nA/N : "+ NamaTujuan + "\nAccount Number : " + AccountNumber,"Confirm the Transfer", JOptionPane.YES_NO_OPTION);
+                    if(tru == JOptionPane.YES_OPTION){
+                        JOptionPane.showMessageDialog(null, "The Transfer is Complete, Your Balance is Rp. " + transferTunai);
+                        try {
+                            user.updateUserBalance(transferTunai);
+                            user.updateBalance(user.getDestinationDocument(AccountNumber),TransferTujuan);
+                        } catch (ExecutionException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (InterruptedException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "The Transfer is Cancelled");
+                    }
+                }
+                // opsi untuk melakukan transaksi lain
+                var YesNo = JOptionPane.showConfirmDialog(null, "Do you have any more transaction", "Other Transaction", JOptionPane.YES_NO_OPTION);
+                if (YesNo == JOptionPane.YES_OPTION) {
+                    PinEnglish.main();
+                    PanelMenuEnglish.setVisible(false);
+                } else {
+                    System.exit(0);
+                }
             }
         });
         balanceButton.addActionListener(new ActionListener() {
