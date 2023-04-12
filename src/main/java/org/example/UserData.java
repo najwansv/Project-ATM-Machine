@@ -23,14 +23,17 @@ public class UserData {
     private int balance;
     private int userName;
 
-    public static String userCardid() {
-        String IDCard = "75:25:F1:41";
-        return IDCard;
-    }
+
+
+    public static String userCardId = "75:25:F1:41";
+//    public static String userCardId {
+//        String IDCard = "75:25:F1:41";
+//        return IDCard;
+//    }
 
     public boolean getUserPin(String inputPin) throws ExecutionException, InterruptedException {
             boolean check = false;
-            if (checkUserPIN(userCardid()).equals(inputPin)) {
+            if (checkUserPIN(userCardId).equals(inputPin)) {
                 check = true;
             } else {
                 check = false;
@@ -40,7 +43,7 @@ public class UserData {
 
     public int getBalance() {
         try {
-            getUserBalance(userCardid());
+            getUserBalance(userCardId);
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
@@ -55,7 +58,7 @@ public class UserData {
     }
 
     public void updateUserBalance(Integer balance) throws ExecutionException, InterruptedException {
-        updateBalance(userCardid(), balance);
+        updateBalance(userCardId, balance);
     }
 
     public void setUserPin(boolean checkUserPin) {
@@ -168,8 +171,7 @@ public class UserData {
         // app.addData();
         // app.checkPin(inputPin, IDCard);
 //        app.checkUserPIN(inputPin, IDCard);
-        System.out.println(app.getUserBalance(userCardid()));
-        System.out.println("halo");
+//        System.out.println(userCardId);
     }
 
 }

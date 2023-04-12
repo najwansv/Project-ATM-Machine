@@ -72,7 +72,7 @@ public class MenuBahasa {
         transferButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String AccountNumber = JOptionPane.showInputDialog("Masukkan Nomor Rekening Tujuan");
+                String AccountNumber = JOptionPane.showInputDialog(null, "Masukkan Nomor Rekening Tujuan");
 //                JOptionPane.showInputDialog("Masukkan Nomor Rekening Tujuan");
                 int transfer = Integer.parseInt(JOptionPane.showInputDialog("Masukkan Jumlah Uang Yang Akan Ditransfer"));
                 // cek saldo
