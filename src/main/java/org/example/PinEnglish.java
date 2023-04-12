@@ -26,6 +26,7 @@ public class PinEnglish {
     private JButton ENTERButton;
     private JButton a0Button;
     public JPanel PanelPinEnglish;
+    int i = 0;
 
     public PinEnglish() {
         try {
@@ -61,17 +62,40 @@ public class PinEnglish {
         ENTERButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String inputtedPin = passwordField1.getText();
                 try {
+                    int go = 0;
+                    String inputtedPin = passwordField1.getText();
                     boolean checking = user.getUserPin(inputtedPin);
                     if (checking) {
-                        System.out.println("PIN is correct");
-                        JFrame next = MenuBahasa.main();
+                        go = 1;
+                        System.out.println("The PIN is Correct");
+                    } else {
+                        System.out.println("The PIN is Incorrect");
+                        JOptionPane.showMessageDialog(null, "The PIN is Incorrect");
+                        if(i !=2){
+                            var YesNo = JOptionPane.showConfirmDialog(null, "Do you want to Exit?", "Try again", JOptionPane.YES_NO_OPTION);
+                            if(YesNo == JOptionPane.YES_OPTION) {
+                                go = 2;
+                            } else if (YesNo == JOptionPane.NO_OPTION) {
+                                go = 3;
+                                i++;
+                            }
+                        }else{
+                            i++;
+                        }
+                    }
+                    if(go == 1){
+                        JFrame next = MenuEnglish.main();
                         next.setContentPane(new MenuEnglish().PanelMenuEnglish);
                         PanelPinEnglish.setVisible(false);
-                    } else {
-                        System.out.println("PIN is incorrect");
-                        JOptionPane.showMessageDialog(null, "PIN is incorrect");
+                    } else if (go == 2) {
+                        JOptionPane.showMessageDialog(null, "Please Take your Card");
+                        System.exit(0);
+                    } else if (go == 3) {
+                        JOptionPane.showMessageDialog(null, "Try Again");
+                    } else if(i == 3){
+                        JOptionPane.showMessageDialog(null, "You have entered the PIN 3 times incorrectly. Please Try again Later.");
+                        System.exit(0);
                     }
 
                 } catch (ExecutionException ex) {
@@ -79,6 +103,13 @@ public class PinEnglish {
                 } catch (InterruptedException ex) {
                     throw new RuntimeException(ex);
                 }
+            }
+        });
+        CANCELButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Please take your card");
+                System.exit(0);
             }
         });
     }
