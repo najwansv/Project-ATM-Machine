@@ -166,10 +166,10 @@ public class UserData {
         UserData app = new UserData(FirestoreClient.getFirestore());
 
 //        String inputPin = "111";
-
-
-        // app.addData();
-        // app.checkPin(inputPin, IDCard);
+//
+//
+//         app.addData();
+//         app.checkPin(inputPin, IDCard);
 //        app.checkUserPIN(inputPin, IDCard);
 //        System.out.println(userCardId);
     }
