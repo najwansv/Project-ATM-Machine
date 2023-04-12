@@ -29,8 +29,20 @@ public class MenuEnglish {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame next = null;
-                next = WithdrawEnglish.main();
-                next.setContentPane(new WithdrawEnglish().PanelWithdrawEnglish);
+                try {
+                    next = WithdrawEnglish.main();
+                } catch (ExecutionException ex) {
+                    throw new RuntimeException(ex);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+                try {
+                    next.setContentPane(new WithdrawEnglish().PanelWithdrawEnglish);
+                } catch (ExecutionException ex) {
+                    throw new RuntimeException(ex);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
                 PanelMenuEnglish.setVisible(false);
             }
         });
