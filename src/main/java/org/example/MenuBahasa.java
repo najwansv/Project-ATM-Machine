@@ -72,21 +72,40 @@ public class MenuBahasa {
         transferButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String NamaTujuan = "";
+                int TransferTujuan = 0;
+
                 String AccountNumber = JOptionPane.showInputDialog(null, "Masukkan Nomor Rekening Tujuan");
+                try {
+                    NamaTujuan = user.getName(AccountNumber);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ExecutionException ex) {
+                    throw new RuntimeException(ex);
+                }
+                try {
+                    if(NamaTujuan == user.getName(AccountNumber)){
+                        JOptionPane.showMessageDialog(null, "Nomor Rekening Tidak Ditemukan");
+                        return;
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Nama Pemilik Rekening : " + NamaTujuan);
+                    }
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ExecutionException ex) {
+                    throw new RuntimeException(ex);
+                }
 //                JOptionPane.showInputDialog("Masukkan Nomor Rekening Tujuan");
                 int transfer = Integer.parseInt(JOptionPane.showInputDialog("Masukkan Jumlah Uang Yang Akan Ditransfer"));
                 // cek saldo
                 if(transfer > balance){
                     JOptionPane.showMessageDialog(null, "Saldo Anda Tidak Mencukupi");
                 }else {
-                    String NamaTujuan = "";
-                    int TransferTujuan = 0;
                     try {
-                        NamaTujuan = user.getName(AccountNumber);
                         TransferTujuan = user.getUserBalance(user.getDestinationDocument(AccountNumber)) + transfer;
-                    } catch (InterruptedException ex) {
-                        throw new RuntimeException(ex);
                     } catch (ExecutionException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (InterruptedException ex) {
                         throw new RuntimeException(ex);
                     }
                     int transferTunai = balance - transfer;
