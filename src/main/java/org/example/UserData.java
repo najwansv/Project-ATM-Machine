@@ -11,33 +11,36 @@ import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import java.util.Observable;
 
-public class UserData {
+public class UserData{
+//    public static String userCardId;
     private Firestore db;
 
     public UserData(Firestore db) {
         this.db = db;
     }
 
-    private boolean checkUserPin;
+    private String checkUserPin;
     private int balance;
     private int userName;
 
-
-
     public static String userCardId = "75:25:F1:41";
-//    public static String userCardId {
-//        String IDCard = "75:25:F1:41";
-//        return IDCard;
-//    }
+//    static GetCard getCard = new GetCard();
+//    public static String userCardId = getCard.receiveMessages();
 
     public boolean getUserPin(String inputPin) throws ExecutionException, InterruptedException {
-            boolean check = false;
-            if (checkUserPIN(userCardId).equals(inputPin)) {
-                check = true;
-            } else {
-                check = false;
-            }
+        boolean check = false;
+        System.out.println("ini id kartu"+userCardId);
+        String userPin = checkUserPIN(userCardId);
+        System.out.println("ini pin"+userPin);
+        String pinmasuk = inputPin;
+        System.out.println("ini pin masuk"+pinmasuk);
+        if (userPin.equals(pinmasuk)) {
+            check = true;
+        } else {
+            check = false;
+        }
         return check;
     }
 
@@ -61,7 +64,7 @@ public class UserData {
         updateBalance(userCardId, balance);
     }
 
-    public void setUserPin(boolean checkUserPin) {
+    public void setUserPin(String checkUserPin) {
 
         this.checkUserPin = checkUserPin;
     }
@@ -82,7 +85,8 @@ public class UserData {
         DocumentSnapshot querySnapshot = query.get();
 
         String userPinn = querySnapshot.getString("PIN");
-//        System.out.println(userPinn);
+
+        System.out.println("pin di database"+userPinn);
         return userPinn;
     }
 
@@ -164,6 +168,9 @@ public class UserData {
 
         initBase();
         UserData app = new UserData(FirestoreClient.getFirestore());
+        System.out.println("ini id kartujuga"+userCardId);
+        app.checkUserPIN(userCardId);
+
 
 //        String inputPin = "111";
 //

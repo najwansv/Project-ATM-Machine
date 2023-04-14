@@ -10,7 +10,8 @@ public class GetCard {
     private String clientId = "myJavaClient";
     private MemoryPersistence persistence = new MemoryPersistence();
 
-    public void receiveMessages() {
+    public String receiveMessages() {
+        final String[] messageCard = {""};
         try {
             MqttClient mqttClient = new MqttClient(brokerUrl, clientId, persistence);
             mqttClient.setCallback(new MqttCallback() {
@@ -23,6 +24,7 @@ public class GetCard {
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
                     System.out.println("MQTT message received: " + message.toString());
                     UserData.userCardId = message.toString(); // Update the value of the public variable
+                    messageCard[0] = message.toString();
                 }
 
                 @Override
@@ -36,5 +38,11 @@ public class GetCard {
         } catch (MqttException e) {
             System.out.println("Error: " + e.getMessage());
         }
+        return messageCard[0];
+    }
+
+    public static void main() {
+        GetCard getCard = new GetCard();
+        getCard.receiveMessages();
     }
 }
