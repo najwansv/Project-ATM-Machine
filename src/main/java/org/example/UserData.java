@@ -11,7 +11,6 @@ import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
-import java.util.Observable;
 
 public class UserData{
 //    public static String userCardId;
