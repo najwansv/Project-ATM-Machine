@@ -57,10 +57,10 @@ public class TarikTunaiBahasa {
         a100Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(balance < 100){
+                if(balance < 100000){
                     JOptionPane.showMessageDialog(null, "Saldo Anda Tidak Mencukupi");
                 }else {
-                    int opsi100 = balance - 100;
+                    int opsi100 = balance - 100000;
                     JOptionPane.showMessageDialog(null, "Rp." + opsi100);
                     try {
                         user.updateUserBalance(opsi100);
@@ -82,10 +82,10 @@ public class TarikTunaiBahasa {
         a200Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(balance < 200){
+                if(balance < 200000){
                     JOptionPane.showMessageDialog(null, "Saldo Anda Tidak Mencukupi");
                 }else {
-                    int opsi200 = balance - 200;
+                    int opsi200 = balance - 200000;
                     JOptionPane.showMessageDialog(null, "Rp." + opsi200);
                     try {
                         user.updateUserBalance(opsi200);
@@ -107,10 +107,10 @@ public class TarikTunaiBahasa {
         a300Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(balance < 300){
+                if(balance < 300000){
                     JOptionPane.showMessageDialog(null, "Saldo Anda Tidak Mencukupi");
                 }else {
-                    int opsi300 = balance - 300;
+                    int opsi300 = balance - 300000;
                     JOptionPane.showMessageDialog(null, "Rp." + opsi300);
                     try {
                         user.updateUserBalance(opsi300);

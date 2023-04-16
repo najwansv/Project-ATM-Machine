@@ -17,7 +17,7 @@
         </constraints>
         <properties>
           <font name="Tahoma" size="20" style="1"/>
-          <text value="100"/>
+          <text value="100.000"/>
         </properties>
       </component>
       <component id="63531" class="javax.swing.JTextArea" binding="pilihNominalYangInginTextArea" default-binding="true">
@@ -43,7 +43,7 @@
         </constraints>
         <properties>
           <font name="Tahoma" size="20" style="1"/>
-          <text value="300"/>
+          <text value="300.000"/>
         </properties>
       </component>
       <component id="f6795" class="javax.swing.JButton" binding="a200Button" default-binding="true">
@@ -52,7 +52,7 @@
         </constraints>
         <properties>
           <font name="Tahoma" size="20" style="1"/>
-          <text value="200"/>
+          <text value="200.000"/>
         </properties>
       </component>
       <component id="cc366" class="javax.swing.JButton" binding="nominalLainButton" default-binding="true">

@@ -18,7 +18,7 @@
         </constraints>
         <properties>
           <font name="Tahoma" size="20" style="1"/>
-          <text value="200"/>
+          <text value="200.000"/>
         </properties>
       </component>
       <component id="36306" class="javax.swing.JButton" binding="a100Button" default-binding="true">
@@ -27,7 +27,7 @@
         </constraints>
         <properties>
           <font name="Tahoma" size="20" style="1"/>
-          <text value="100"/>
+          <text value="100.000"/>
         </properties>
       </component>
       <component id="e70ec" class="javax.swing.JButton" binding="otherAmountButton" default-binding="true">
@@ -45,7 +45,7 @@
         </constraints>
         <properties>
           <font name="Tahoma" size="20" style="1"/>
-          <text value="300"/>
+          <text value="300.000"/>
         </properties>
       </component>
       <vspacer id="ea7c9">
